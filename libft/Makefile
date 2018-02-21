@@ -39,7 +39,7 @@ LIST_SRC =	ft_lstadd.c ft_lstdel.c ft_lstdelone.c ft_lstiter.c ft_lstmap.c ft_ls
 MATH_SRC =	ft_abs.c ft_equa.c ft_vec.c
 
 MEM_SRC =	ft_bzero.c ft_memalloc.c ft_memccpy.c ft_memchr.c ft_memcmp.c ft_memcpy.c ft_memdel.c \
-			ft_memmove.c ft_memset.c
+			ft_memmove.c ft_memset.c ft_nrealloc.c
 
 STR_SRC =	ft_chartostr.c ft_isprint.c ft_strcpy.c ft_strjoin.c ft_strncat.c ft_strrchr.c \
 			ft_tolower.c ft_chrcstr.c ft_strcat.c ft_strcsub.c ft_strjoin_char.c ft_strncmp.c \
@@ -79,7 +79,6 @@ $(NAME):
 	@mkdir $(OBJ_PATH) && cd $(OBJ_PATH) && $(CC) $(CPPFLAGS) $(INCLUDES) -c $(SOURCES)
 	@ar rc $(NAME) $(BUILD_OBJ)
 	@ranlib $(NAME)
-	@echo "Compiled libft."
 
 clean:
 	@rm -rf $(OBJ_PATH)

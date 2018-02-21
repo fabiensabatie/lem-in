@@ -30,7 +30,7 @@ LIB_PATH = ./libft
 FILL_SRCS = ../srcs
 BUILD_PATH = build
 
-FILL_SRC_F =	lem_in.c
+FILL_SRC_F =	lem_in.c parser.c rooms.c matrices.c
 
 OBJ_NAME = $(FILL_SRC_F:.c=.o)
 OBJS = $(addprefix $(BUILD_PATH)/,$(OBJ_NAME))
@@ -46,10 +46,12 @@ CPPFLAGS = -Wall -Wextra -Werror -g
 
 all: $(NAME)
 
-$(NAME):
+lib:
 	@make -C $(LIB_PATH)
 	@echo "$(GREEN)Successfully compiled libft.$(RESET)"
-	@mkdir $(BUILD_PATH) && cd $(BUILD_PATH) && $(CC) $(CPPFLAGS) -c $(SRCS)
+
+$(NAME): lib
+	@mkdir -p $(BUILD_PATH) && cd $(BUILD_PATH) && $(CC) $(CPPFLAGS) -c $(SRCS)
 	@$(CC) $(CPPFLAGS) -o $(NAME) $(OBJS) $(LIB)
 	@echo "$(GREEN)Successfully the binary.$(RESET)"
 
@@ -59,36 +61,36 @@ clean:
 
 fclean: clean
 	@make fclean -C $(LIB_PATH)
-	@rm -rf players/$(NAME)
+	@rm -rf $(NAME)
 
 re: fclean all
 
 peace:
 	@clear;
 	@echo "$(GREEN)"
-	@echo "                                                 .                                                  "
-	@echo "                                                 :\`                                                 "
-	@echo "                                                 ++                                                 "
-	@echo "                                                .ss:                                                "
-	@echo "                                                +yys.                                               "
-	@echo "                                               -yyys/                   \`                           "
-	@echo "                            \`                  oyyyso                 .:                            "
-	@echo "                             -/-\`             .syyyys.             \`:o/                             "
-	@echo "                              \`oyo:\`          :yyyyys:           :oyyo                              "
-	@echo "                               .syyso-\`       +yyyyys/        -+syyyo\`                              "
-	@echo "                                \`oyyyys/\`    \`syyyyss:     ./syyyyyo\`                               "
-	@echo "                                 \`oyyyyys:   .yyyyyss:   \`/yyyyyyso\`                                "
-	@echo "                                  \`oyyyyyyo. .yyyyyss-  -yyyyyyss+                                  "
-	@echo "                                   \`+yyyyyyy- +yyyyss\`\`+yyyyysss/\`                                  "
-	@echo "                                     -syyyyyy-.syyys/.oyyyyyss+.                                    "
-	@echo "                                       -oyyyys\`-yyyo.syyyyss/.                                      "
-	@echo "                          \`.-/+//:/::-.\` \`-+yyo :yo.oyyso:-\`.-:/++ooso/:.\`                          "
-	@echo "                              ./oyyyyyyyso/-\`.// o.++-..:+osyyyyyys+-                               "
-	@echo "                                 \`./+ossyysss+::://-:ossyyyyyyso/.                                  "
-	@echo "                                         \`./+os:\`.:so++/:-.-\`\`                                      "
-	@echo "                                      \`-oyys/-\` \`. \`:oyhhy+-                                        "
-	@echo "                                    \`:+/:.\`     .\`     ./ooys:\`                                     "
-	@echo "                                   \`-           .           \`./:                                    "
-	@echo "                                                -               \`                                   "
-	@echo "                                                -                                                   "
-	@echo "                                                -                                                   "
+	@echo "                                                 ."
+	@echo "                                                 :\`"
+	@echo "                                                 ++"
+	@echo "                                                .ss:"
+	@echo "                                                +yys."
+	@echo "                                               -yyys/                   \`"
+	@echo "                            \`                  oyyyso                 .:"
+	@echo "                             -/-\`             .syyyys.             \`:o/"
+	@echo "                              \`oyo:\`          :yyyyys:           :oyyo"
+	@echo "                               .syyso-\`       +yyyyys/        -+syyyo\`"
+	@echo "                                \`oyyyys/\`    \`syyyyss:     ./syyyyyo\`"
+	@echo "                                 \`oyyyyys:   .yyyyyss:   \`/yyyyyyso\`"
+	@echo "                                  \`oyyyyyyo. .yyyyyss-  -yyyyyyss+"
+	@echo "                                   \`+yyyyyyy- +yyyyss\`\`+yyyyysss/\`"
+	@echo "                                     -syyyyyy-.syyys/.oyyyyyss+."
+	@echo "                                       -oyyyys\`-yyyo.syyyyss/."
+	@echo "                          \`.-/+//:/::-.\` \`-+yyo :yo.oyyso:-\`.-:/++ooso/:.\`"
+	@echo "                              ./oyyyyyyyso/-\`.// o.++-..:+osyyyyyys+-"
+	@echo "                                 \`./+ossyysss+::://-:ossyyyyyyso/."
+	@echo "                                         \`./+os:\`.:so++/:-.-\`\`"
+	@echo "                                      \`-oyys/-\` \`. \`:oyhhy+-"
+	@echo "                                    \`:+/:.\`     .\`     ./ooys:\`"
+	@echo "                                   \`-           .           \`./:"
+	@echo "                                                -               \`"
+	@echo "                                                -"
+	@echo "                                                -"

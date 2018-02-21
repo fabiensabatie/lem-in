@@ -41,9 +41,8 @@
 # define BLINKON	"\x1b[5m"
 # define BLINKOFF	"\x1b[25m"
 # define P_ALLOC(x, y, z) if(!(x = (y)ft_memalloc(z))) exit(1);
-# define PR_ALLOC(x, y, z) if(!(x = (y)ft_memalloc(z))) return(NULL);
-# define RAGEQUIT(x, y) if(!(x)) return (y);
-# define EXRAGEQUIT(x, y) if(!(x)) exit (y);
+# define PALLOC(x, y, z, ret) if(!(x = (y)ft_memalloc(z))) return (ret);
+# define PR_ALLOC(x, y, z) if(!(x = (y)ft_memalloc(z))) return (NULL);
 # define IFRET(x, y) if(x) return (y)
 # define IF(x, y) if(x) (y)
 # define POW2(x) (x) * (x)
@@ -199,6 +198,7 @@ void				ft_lstpushback(t_list **alst, t_list *new);
 void				*ft_memcpy(void *dst, void *src, size_t n);
 void				*ft_memmove(void *dst, void *src, size_t n);
 void				ft_lstiter(t_list *lst, void (*f)(t_list *elem));
+void				*ft_nrealloc(void *old, size_t size, size_t elems);
 void				*ft_memccpy(void *dst, void *src, int c, size_t n);
 void				ft_lstdel(t_list **alst, void (*del)(void *, size_t));
 void				ft_striteri(char *s, void (*f)(unsigned int, char *));
