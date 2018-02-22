@@ -24,6 +24,5 @@ int	build_lmatrix(t_lem *lem)
 		PALLOC(LML[i], t_bool*, LNR * sizeof(t_bool), 0);
 		ft_bzero(LML[i++], LNR * sizeof(t_bool));
 	}
-
 	return (1);
 }

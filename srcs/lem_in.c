@@ -12,14 +12,8 @@
 
 #include "../includes/lem_in.h"
 
-int main(void)
+static void print_infos(t_lem lem)
 {
-	t_lem lem;
-
-	ft_bzero(&lem, sizeof(lem));
-	_LML = NULL;
-	if (parse(&lem))
-		return (0);
 	ft_printf("%d fourmis ont ete assignees a start.\n", _LANTS);
 	ft_printf("%d salles ont ete parsees.\n", _LNR);
 	ft_printf("  1 2 3 4 5 6 7 8 9 0\n");
@@ -30,4 +24,25 @@ int main(void)
 		}
 		ft_printf("\n");
 	}
+}
+
+// /** Ce qu'il reste à faire :
+// ** - Si on rencontre une erreur, il faut continuer avec ce que l'on a. Il
+// ** faut vérifier que l'on ai assez de données pour effectuer un traitement
+// ** correct.
+// ** - Faire parcourir aux v_ants les nodes, et les récupérer.
+// ** - Etablir les ensembles de chemins.
+// ** - Faire traverser les chemins par les ants.
+// **/
+
+int main(void)
+{
+	t_lem lem;
+
+	ft_bzero(&lem, sizeof(lem));
+	_LML = NULL;
+	if (!parse(&lem))
+		return (ft_printf("ERROR\n"));
+	print_infos(lem);
+	get_paths(&lem);
 }
