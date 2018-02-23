@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "../includes/lem_in.h"
+#define ANTS_IN_END LROOMS[LEID]->virtual_a
 
 static size_t	get_max_paths(t_lem *lem)
 {
@@ -32,18 +33,22 @@ static size_t	get_max_paths(t_lem *lem)
 void	 			get_paths(t_lem *lem)
 {
 	size_t	max_paths;
+	size_t	gen;
 	size_t	i;
 
-	i = 0;
+	i = LSID;
+	gen = 0;
 	max_paths = get_max_paths(lem);
 	push_vant(lem, NULL, LROOMS[LSID]);
 	ft_printf("%d max paths\n", max_paths);
-	while (LROOMS[LEID]->virtual_a < max_paths)
+	ft_printf("LSID %d - LEID %d\n", LSID, LEID);
+	while (LAANTS > 0) // tant que l'ensemble de chemins ne dispose pas de max-paths chemins compatibles
 	{
-		ft_printf("LROOMS[LEID]->virtual_a =  %ld\n", LROOMS[LEID]->virtual_a);
-		spread_ants(lem, LROOMS[i++]);
-		i++;
+		spread_ants(lem, LROOMS[i++], gen);
+		if (i == LNR)
+			gen++;
 		i %= LNR;
+		 
 	}
 	for (size_t y = 0; y < LROOMS[LEID]->virtual_a; y++) {
 		ft_printf("%s\n", LROOMS[LEID]->vants[y]->paths);

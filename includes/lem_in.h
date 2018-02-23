@@ -22,12 +22,14 @@
 # define _LML lem.m_links
 # define _LSID lem.start_id
 # define _LEID lem.end_id
+# define _LAANTS lem.alive_ants
 # define LANTS lem->ants
 # define LROOMS lem->rooms
 # define LNR lem->nroom
 # define LML lem->m_links
 # define LSID lem->start_id
 # define LEID lem->end_id
+# define LAANTS lem->alive_ants
 
 /** ROOM DEFINES */
 
@@ -47,9 +49,11 @@
 # define _VID v_ant.id
 # define _VHIT v_ant.hits
 # define _VPATH v_ant.paths
+# define _VGEN v_ant.generation
 # define VID v_ant->id
 # define VHIT v_ant->hits
 # define VPATH v_ant->paths
+# define VGEN v_ant->gen
 
 typedef enum	e_type
 {
@@ -61,8 +65,9 @@ typedef enum	e_type
 typedef struct	s_vant
 {
 	size_t		hits;
-	t_bool		read;
+	t_bool		dead;
 	char		paths[1024];
+	size_t		gen;
 }				t_vant;
 
 typedef struct	s_room
@@ -84,6 +89,7 @@ typedef struct	s_lem
 	size_t		ants;
 	size_t		start_id;
 	size_t		end_id;
+	size_t		alive_ants;
 }				t_lem;
 
 int					parse(t_lem *lem);
@@ -92,6 +98,6 @@ int					build_lmatrix(t_lem *lem);
 int					new_room(t_lem *lem, char *name);
 void				get_paths(t_lem *lem);
 void				push_vant(t_lem *lem, t_vant *queen, t_room *room);
-void				spread_ants(t_lem *lem, t_room* room);
+void				spread_ants(t_lem *lem, t_room* room, size_t gen);
 
 #endif

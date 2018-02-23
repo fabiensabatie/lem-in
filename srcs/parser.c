@@ -22,8 +22,8 @@ static inline void parse_room(t_lem *lem, char *name, t_type *type)
 	LROOMS[LNR - 1]->type = 0 ;
 	if (*type != none && (LROOMS[LNR - 1]->type = *type))
 	{
-		LSID = (!LSID && *type == start) ? LROOMS[LNR - 1]->id : 0;
-		LEID = (!LEID && *type == end) ? LROOMS[LNR - 1]->id : 0;
+		LSID = (!LSID && *type == start) ? LROOMS[LNR - 1]->id : LSID;
+		LEID = (!LEID && *type == end) ? LROOMS[LNR - 1]->id : LEID;
 		(*type == start) ? g_start++ : g_end++;
 		*type = none;
 	}
