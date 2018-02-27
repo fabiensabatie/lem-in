@@ -20,6 +20,5 @@ void	*ft_nrealloc(void *old, size_t size, size_t elems)
 		return (NULL);
 	ft_bzero(ret, (elems + 1) * size);
 	ft_memcpy(ret, old, elems * size);
-	free(old);
 	return (ret);
 }

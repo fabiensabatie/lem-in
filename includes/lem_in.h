@@ -23,6 +23,8 @@
 # define _LSID lem.start_id
 # define _LEID lem.end_id
 # define _LAANTS lem.alive_ants
+# define _LBP lem->bpaths
+# define _LP lem.paths
 # define LANTS lem->ants
 # define LROOMS lem->rooms
 # define LNR lem->nroom
@@ -30,6 +32,8 @@
 # define LSID lem->start_id
 # define LEID lem->end_id
 # define LAANTS lem->alive_ants
+# define LBP lem->bpaths
+# define LP lem->paths
 
 /** ROOM DEFINES */
 
@@ -46,14 +50,14 @@
 
 /** V_ANTS DEFINES */
 
-# define _VID v_ant.id
-# define _VHIT v_ant.hits
-# define _VPATH v_ant.paths
-# define _VGEN v_ant.generation
-# define VID v_ant->id
-# define VHIT v_ant->hits
-# define VPATH v_ant->paths
-# define VGEN v_ant->gen
+# define _VID vant.id
+# define _VPATH vant.path
+# define _VGEN vant.generation
+# define VID vant->id
+# define VPATH vant->path
+# define VGEN vant->gen
+
+typedef struct	s_room t_room;
 
 typedef enum	e_type
 {
@@ -64,9 +68,8 @@ typedef enum	e_type
 
 typedef struct	s_vant
 {
-	size_t		hits;
 	t_bool		dead;
-	char		paths[1024];
+	t_room		**path;
 	size_t		gen;
 }				t_vant;
 
@@ -90,6 +93,8 @@ typedef struct	s_lem
 	size_t		start_id;
 	size_t		end_id;
 	size_t		alive_ants;
+	size_t		bpaths;
+	t_vant		**paths;
 }				t_lem;
 
 int					parse(t_lem *lem);

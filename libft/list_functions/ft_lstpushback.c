@@ -16,11 +16,8 @@
 ** Ajoute l’élément new en fin de liste.
 */
 
-void	ft_lstpushback(t_list **alst, t_list *new)
+void	ft_lstpushback(t_list *start, t_list *new)
 {
-	t_list *start;
-
-	start = *alst;
 	while (start->next)
 		start = start->next;
 	start->next = new;

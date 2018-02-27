@@ -43,6 +43,7 @@
 # define P_ALLOC(x, y, z) if(!(x = (y)ft_memalloc(z))) exit(1);
 # define PALLOC(x, y, z, ret) if(!(x = (y)ft_memalloc(z))) return (ret);
 # define PR_ALLOC(x, y, z) if(!(x = (y)ft_memalloc(z))) return (NULL);
+# define NORET_ALLOC(x, y, z) if(!(x = (y)ft_memalloc(z))) return ;
 # define IFRET(x, y) if(x) return (y)
 # define IF(x, y) if(x) (y)
 # define POW2(x) (x) * (x)
@@ -194,7 +195,7 @@ void				*ft_memchr(void *s, int c, size_t n);
 void				ft_lstadd(t_list **alst, t_list *new);
 void				ft_striter(char *s, void (*f)(char *));
 void				*ft_memset(void *str, int c, size_t len);
-void				ft_lstpushback(t_list **alst, t_list *new);
+void				ft_lstpushback(t_list *alst, t_list *new);
 void				*ft_memcpy(void *dst, void *src, size_t n);
 void				*ft_memmove(void *dst, void *src, size_t n);
 void				ft_lstiter(t_list *lst, void (*f)(t_list *elem));

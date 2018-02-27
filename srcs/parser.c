@@ -51,7 +51,7 @@ int	parse(t_lem *lem)
 
 	LNR = 0;
 	type = none;
-	IFRET(!(LROOMS = (t_room**)ft_memalloc(sizeof(t_room*))), 0);
+	IFRET(!(LROOMS = (t_room**)malloc(sizeof(t_room*))), 0);
 	LROOMS = 0;
 	while (get_next_line(0, &line))
 	{

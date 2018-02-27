@@ -17,11 +17,13 @@ int	build_lmatrix(t_lem *lem)
 	size_t i;
 
 	i = 0;
-	PALLOC(LML, t_bool**, LNR * sizeof(t_bool*), 0);
+	if (!(LML = (t_bool**)malloc(LNR * sizeof(t_bool*))))
+		return (0);
 	ft_bzero(LML, LNR * sizeof(t_bool*));
 	while (i < LNR)
 	{
-		PALLOC(LML[i], t_bool*, LNR * sizeof(t_bool), 0);
+		if (!(LML[i] = (t_bool*)malloc(LNR * sizeof(t_bool))))
+			return (0);
 		ft_bzero(LML[i++], LNR * sizeof(t_bool));
 	}
 	return (1);
