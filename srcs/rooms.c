@@ -12,11 +12,14 @@
 
 #include "../includes/lem_in.h"
 
+#define R 10000000
+
 int	new_room(t_lem *lem, char *name)
 {
 	t_room	*room;
 
-	IFRET (!(LROOMS = (t_room**)ft_nrealloc(LROOMS, sizeof(t_room*), LNR)), 0);
+	IFRET (!LROOMS && !(LROOMS = (t_room**)malloc(sizeof(t_room*) * R)), 0);
+	// IFRET (!(LROOMS = (t_room**)ft_nrealloc(LROOMS, sizeof(t_room*), LNR)), 0);
 	IFRET (!(room = (t_room*)malloc(sizeof(t_room))), 0);
 	ft_bzero(room, sizeof(room));
 	if (LNR > 0 && get_id(lem, name) != -1)

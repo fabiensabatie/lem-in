@@ -34,6 +34,8 @@
 # define LAANTS lem->alive_ants
 # define LBP lem->bpaths
 # define LP lem->paths
+# define LR LROOMS[LEID]
+# define FR LROOMS[LSID]
 
 /** ROOM DEFINES */
 
@@ -76,6 +78,7 @@ typedef struct	s_vant
 typedef struct	s_room
 {
 	char		*name;
+	size_t		a_id;
 	size_t		id;
 	size_t		ants;
 	size_t		virtual_a;
@@ -99,10 +102,9 @@ typedef struct	s_lem
 
 int					parse(t_lem *lem);
 int					get_id(t_lem *lem, char *name);
-int					build_lmatrix(t_lem *lem);
 int					new_room(t_lem *lem, char *name);
 void				get_paths(t_lem *lem);
-void				push_vant(t_lem *lem, t_vant *queen, t_room *room);
+void				push_vant(t_vant *queen, t_room *room);
 void				spread_ants(t_lem *lem, t_room* room, size_t gen);
 
 #endif

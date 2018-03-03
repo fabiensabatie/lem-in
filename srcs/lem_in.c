@@ -11,29 +11,50 @@
 /* ************************************************************************** */
 
 #include "../includes/lem_in.h"
+#define UPANTID LP[i]->path[p_len + 1]->a_id
+#define UPANTS LP[i]->path[p_len + 1]->ants
+#define UPRNAME LP[i]->path[p_len + 1]->name
+#define ANTID LP[i]->path[p_len]->a_id
 
-static void print_infos(t_lem lem)
+static void dispatch(t_lem *lem, size_t i, size_t *id, int p_len)
 {
-	ft_printf("%d fourmis ont ete assignees a start.\n", _LANTS);
-	ft_printf("%d salles ont ete parsees.\n", _LNR);
-	ft_printf("  1 2 3 4 5 6 7 8 9 0\n");
-	for (size_t i = 0; i < _LNR; i++) {
-		ft_printf("%li ", ((i + 1) % 10));
-		for (size_t y = 0; y < _LNR; y++) {
-			ft_printf("%d ", _LML[i][y]);
+	if (LP[i]->path[p_len]->ants)
+	{
+		if (p_len == 0 && (UPANTS += 1)
+		&& (UPANTID = *id++))
+			ft_printf("L%ld-%s ", id - 1, UPRNAME);
+		else if (p_len == (int)LP[i]->gen - 1 && (LR->ants += 1))
+			ft_printf("L%ld-%s ", ANTID, LR->name);
+		else if ((UPANTS += 1) && (UPANTID = ANTID))
+			ft_printf("L%ld-%s ",  ANTID, UPRNAME);
+		LP[i]->path[p_len]->ants--;
+	}
+}
+
+static void send_ants(t_lem *lem)
+{
+	size_t	i;
+	size_t	id;
+	int		p_len;
+
+	id = 1;
+	LROOMS[LSID]->ants = LANTS;
+	while (LROOMS[LEID]->ants < LANTS)
+	{
+		i = 0;
+		while (i < LBP)
+		{
+			p_len = LP[i]->gen - 1;
+			while (p_len >= 0)
+			{
+				dispatch(lem, i, &id, p_len);
+				p_len--;
+			}
+			i++;
 		}
 		ft_printf("\n");
 	}
 }
-
-// /** Ce qu'il reste à faire :
-// ** - Si on rencontre une erreur, il faut continuer avec ce que l'on a. Il
-// ** faut vérifier que l'on ai assez de données pour effectuer un traitement
-// ** correct.
-// ** - Faire parcourir aux v_ants les nodes, et les récupérer.
-// ** - Etablir les ensembles de chemins.
-// ** - Faire traverser les chemins par les ants.
-// **/
 
 int main(void)
 {
@@ -43,6 +64,7 @@ int main(void)
 	_LML = NULL;
 	if (!parse(&lem))
 		return (ft_printf("ERROR\n"));
-	print_infos(lem);
+	ft_printf("\n");
 	get_paths(&lem);
+	send_ants(&lem);
 }

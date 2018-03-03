@@ -22,7 +22,7 @@
 # include <sys/types.h>
 # include <sys/uio.h>
 # include <fcntl.h>
-# define BUFF_SIZE 100000
+# define BUFF_SIZE 1000000
 # define BEFORE 0
 # define AFTER 1
 # define DIGITS 0
