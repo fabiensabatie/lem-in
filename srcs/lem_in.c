@@ -63,7 +63,6 @@ int main(void)
 	_LML = NULL;
 	if (!parse(&lem))
 		return (ft_printf("ERROR\n"));
-	ft_printf("\n");
 	get_paths(&lem);
 	send_ants(&lem);
 }

@@ -1,0 +1,15 @@
+25
+##start
+start 0 0
+##end
+end 0 0
+C 0 0
+B 0 0
+A 0 0
+D 0 0
+start-A
+start-B
+start-C
+end-B
+end-D
+end-C
