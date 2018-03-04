@@ -62,8 +62,8 @@ static void		find_bpaths(t_lem *lem, size_t max_paths)
 		}
 		i++;
 	}
-	if (i == ANTS_IN_END)
-		LBP = 0;
+	// if (i == ANTS_IN_END)
+	// 	LBP = 0;
 }
 
 static size_t	get_max_paths(t_lem *lem)
@@ -95,8 +95,8 @@ void	 			get_paths(t_lem *lem)
 	max_paths = get_max_paths(lem);
 	if (!(LP = (t_vant**)malloc(sizeof(t_vant*) * max_paths)))
 		return ;
-	push_vant(NULL, LROOMS[LSID]);
-	while (LBP < max_paths)
+	push_vant(lem, NULL, LROOMS[LSID]);
+	while (LBP < max_paths && LAANTS > 0)
 	{
 		spread_ants(lem, LROOMS[i++], gen);
 		if (i == LNR)

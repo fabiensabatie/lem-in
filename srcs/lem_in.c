@@ -20,9 +20,8 @@ static void dispatch(t_lem *lem, size_t i, size_t *id, int p_len)
 {
 	if (LP[i]->path[p_len]->ants)
 	{
-		if (p_len == 0 && (UPANTS += 1)
-		&& (UPANTID = *id++))
-			ft_printf("L%ld-%s ", id - 1, UPRNAME);
+		if (p_len == 0 && (UPANTS += 1))
+			ft_printf("L%ld-%s ", (UPANTID = (*id)++) , UPRNAME);
 		else if (p_len == (int)LP[i]->gen - 1 && (LR->ants += 1))
 			ft_printf("L%ld-%s ", ANTID, LR->name);
 		else if ((UPANTS += 1) && (UPANTID = ANTID))

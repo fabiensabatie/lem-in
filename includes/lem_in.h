@@ -104,7 +104,7 @@ int					parse(t_lem *lem);
 int					get_id(t_lem *lem, char *name);
 int					new_room(t_lem *lem, char *name);
 void				get_paths(t_lem *lem);
-void				push_vant(t_vant *queen, t_room *room);
+void				push_vant(t_lem *lem, t_vant *queen, t_room *room);
 void				spread_ants(t_lem *lem, t_room* room, size_t gen);
 
 #endif
