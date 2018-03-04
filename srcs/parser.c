@@ -77,7 +77,7 @@ int	parse(t_lem *lem)
 	type = none;
 	IFRET(!(LROOMS = (t_room**)malloc(sizeof(t_room*))), 0);
 	LROOMS = 0;
-	while (get_next_line(0, &line))
+	while (get_next_line(0, &line) > 0)
 	{
 		ft_printf("%s\n", line);
 		if (!LANTS && !(LANTS = ft_atoi(line)))
