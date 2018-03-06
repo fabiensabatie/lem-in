@@ -40,6 +40,7 @@
 # define CR			"\x1b[39m"
 # define BLINKON	"\x1b[5m"
 # define BLINKOFF	"\x1b[25m"
+# define CLEAR		"\033[2J\033[1;1H"
 # define P_ALLOC(x, y, z) if(!(x = (y)ft_memalloc(z))) exit(1);
 # define PALLOC(x, y, z, ret) if(!(x = (y)ft_memalloc(z))) return (ret);
 # define PR_ALLOC(x, y, z) if(!(x = (y)ft_memalloc(z))) return (NULL);

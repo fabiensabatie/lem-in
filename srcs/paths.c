@@ -36,6 +36,22 @@ static	t_bool	comp_paths(t_vant **group, t_vant *b, size_t size)
 	return (1);
 }
 
+void	keep_best(t_lem *lem)
+{
+	size_t i;
+
+	i = 0;
+	if (LSP > LBP)
+	{
+		while (i < LSP)
+		{
+			LP[i] = LS[i];
+			i++;
+		}
+		LBP = LSP;
+	}
+}
+
 static void		find_bpaths(t_lem *lem, size_t max_paths)
 {
 	size_t i;
@@ -45,25 +61,26 @@ static void		find_bpaths(t_lem *lem, size_t max_paths)
 	if (max_paths == 1 && LR->virtual_a && (LP[0] == LR->vants[0])
 	&& (LBP += 1))
 		return ;
-	while (LBP < max_paths && i < ANTS_IN_END)
+	while (LSP < max_paths && i < ANTS_IN_END)
 	{
-		LBP = 1;
-		ft_bzero(LP, sizeof(t_room*) * max_paths);
-		LP[0] = LR->vants[i];
+		LSP = 1;
+		ft_bzero(LS, sizeof(t_room*) * max_paths);
+		LS[0] = LR->vants[i];
 		y = i + 1;
 		while (y < ANTS_IN_END)
 		{
-			if (comp_paths(LP, LR->vants[y], LBP))
+			if (comp_paths(LS, LR->vants[y], LSP))
 			{
-				LP[LBP] = LR->vants[y];
-				LBP++;
+				LS[LSP] = LR->vants[y];
+				LSP++;
+				keep_best(lem);
 			}
 			y++;
 		}
 		i++;
 	}
-	// if (i == ANTS_IN_END)
-	// 	LBP = 0;
+	if (!LBP && LSP == 1 && (LBP = 1))
+		LP[0] = LS[0];
 }
 
 static size_t	get_max_paths(t_lem *lem)
@@ -92,17 +109,24 @@ void	 			get_paths(t_lem *lem)
 	i = LSID;
 	gen = 0;
 	LBP = 0;
+	LSP = 0;
 	max_paths = get_max_paths(lem);
 	if (!(LP = (t_vant**)malloc(sizeof(t_vant*) * max_paths)))
+		return ;
+	if (!(LS = (t_vant**)malloc(sizeof(t_vant*) * max_paths)))
 		return ;
 	push_vant(lem, NULL, LROOMS[LSID]);
 	while (LBP < max_paths && LAANTS > 0)
 	{
 		spread_ants(lem, LROOMS[i++], gen);
 		if (i == LNR)
+		{
 			gen++;
+			if (ANTS_IN_END >= 1)
+				find_bpaths(lem, max_paths);
+		}
 		i %= LNR;
-		if (ANTS_IN_END >= max_paths)
-			find_bpaths(lem, max_paths);
 	}
+	if (LBP == 0)
+		exit(ft_printf("ERROR\n"));
 }

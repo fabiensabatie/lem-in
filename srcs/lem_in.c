@@ -38,6 +38,7 @@ static void send_ants(t_lem *lem)
 
 	id = 1;
 	LROOMS[LSID]->ants = LANTS;
+	ft_printf("\n");
 	while (LROOMS[LEID]->ants < LANTS)
 	{
 		i = 0;
@@ -55,6 +56,22 @@ static void send_ants(t_lem *lem)
 	}
 }
 
+static void free_all(t_lem *lem)
+{
+	size_t i;
+	// size_t ants;
+
+	i = 0;
+	// ants = 0;
+	while (i < LNR)
+	{
+		// while (ants < LROOMS[i]->virtual_a)
+		// 	free(LROOMS[i]->vants[ants]);
+		free (LROOMS[i++]);
+	}
+	free(LROOMS);
+}
+
 int main(void)
 {
 	t_lem lem;
@@ -65,4 +82,6 @@ int main(void)
 		return (ft_printf("ERROR\n"));
 	get_paths(&lem);
 	send_ants(&lem);
+	free_all(&lem);
+	while (1);
 }

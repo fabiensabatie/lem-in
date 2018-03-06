@@ -23,8 +23,10 @@
 # define _LSID lem.start_id
 # define _LEID lem.end_id
 # define _LAANTS lem.alive_ants
-# define _LBP lem->bpaths
+# define _LBP lem.bpaths
 # define _LP lem.paths
+# define _LSP lem.spaths
+# define _LS lem.s_paths
 # define LANTS lem->ants
 # define LROOMS lem->rooms
 # define LNR lem->nroom
@@ -34,6 +36,8 @@
 # define LAANTS lem->alive_ants
 # define LBP lem->bpaths
 # define LP lem->paths
+# define LSP lem->spaths
+# define LS lem->s_paths
 # define LR LROOMS[LEID]
 # define FR LROOMS[LSID]
 
@@ -97,6 +101,8 @@ typedef struct	s_lem
 	size_t		end_id;
 	size_t		alive_ants;
 	size_t		bpaths;
+	size_t		spaths;
+	t_vant		**s_paths;
 	t_vant		**paths;
 }				t_lem;
 
