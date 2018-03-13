@@ -6,7 +6,7 @@
 /*   By: fsabatie <fsabatie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/07 16:49:41 by fsabatie          #+#    #+#             */
-/*   Updated: 2018/02/16 14:45:09 by fsabatie         ###   ########.fr       */
+/*   Updated: 2018/03/08 19:57:44 by fsabatie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,13 +53,13 @@
 ** PRINTF
 */
 
-typedef enum	e_bool
+typedef enum		e_bool
 {
 	TRUE,
 	FALSE
-}				t_bool;
+}					t_bool;
 
-typedef enum	e_mod
+typedef enum		e_mod
 {
 	H,
 	HH,
@@ -68,7 +68,7 @@ typedef enum	e_mod
 	J,
 	Z,
 	X
-}				t_mod;
+}					t_mod;
 
 typedef struct		s_print
 {
@@ -141,21 +141,8 @@ typedef struct		s_list
 	struct s_list	*next;
 }					t_list;
 
-typedef struct		s_vec
-{
-	float			x;
-	float			y;
-}					t_vec;
-
-typedef struct		s_equa
-{
-	float			x;
-	float			y;
-	float			a;
-	float			b;
-}					t_equa;
-
 unsigned long long	ft_abs(int n);
+size_t				ft_pos_atoi(char *str);
 size_t				ft_strlen(char *str);
 size_t				ft_wstrlen(wchar_t *wstr);
 size_t				ft_strcount(char *haystack, char needle);
@@ -188,7 +175,6 @@ void				ft_putendl(char const *s);
 void				*ft_memalloc(size_t size);
 void				ft_putnbr_fd(int n, int fd);
 void				ft_putchar_fd(char c, int fd);
-void				ft_swapvec(t_vec *a, t_vec *b);
 void				*ft_bzero(void *str, size_t len);
 void				ft_putstr_fd(char const *s, int fd);
 void				ft_putendl_fd(char const *s, int fd);
@@ -235,9 +221,22 @@ t_list				*ft_lstpop(t_list **alst, size_t n);
 t_list				*ft_lstmap(t_list *lst, t_list *(*f)(t_list *elem));
 t_list				*ft_lstnew(void const *content, size_t content_size);
 wchar_t				*ft_wstrnsub(wchar_t *s, int n);
-t_vec				*ft_vecnew(float x, float y);
-t_vec				*ft_getmidcoor(t_vec *a, t_vec *b);
-t_vec				*ft_get_perpendicular_vec(t_vec *a, t_bool way);
-t_equa				*ft_equanew(float x, float y, float a, float b);
+
+/*
+** VECTORS
+*/
+
+typedef struct		s_vec
+{
+	void			*buffer;
+	size_t			size;
+	size_t			occ;
+	int				data_size;
+	int				row;
+}					t_vec;
+
+t_vec				*ft_vecnew(size_t size, int datasize);
+t_vec				*ft_vecpush(t_vec *vec, void *data, size_t elem);
+
 
 #endif

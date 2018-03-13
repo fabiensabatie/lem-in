@@ -1,23 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_nrealloc.c                                      :+:      :+:    :+:   */
+/*   ft_vecbew.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fsabatie <fsabatie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/11/08 21:29:40 by fsabatie          #+#    #+#             */
-/*   Updated: 2018/03/08 18:59:47 by fsabatie         ###   ########.fr       */
+/*   Created: 2017/11/07 16:49:41 by fsabatie          #+#    #+#             */
+/*   Updated: 2018/02/04 13:18:51 by fsabatie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	*ft_nrealloc(void *old, size_t size, size_t elems)
+t_vec	*ft_vecnew(size_t size, int datasize)
 {
-	void *ret;
+	t_vec *vec;
 
-	if (!(ret = (ft_memalloc(size * (elems + 1)))))
+	if (!(vec = (t_vec*)malloc(sizeof(t_vec))))
 		return (NULL);
-	ft_memcpy(ret, old, elems * size);
-	return (ret);
+	if (!(vec->buffer = (void*)malloc(size * datasize)))
+		return (NULL);
+	vec->size = size;
+	vec->data_size = datasize;
+	vec->occ = 0;
+	vec->row = 1;
+	return (vec);
 }

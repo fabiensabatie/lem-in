@@ -6,7 +6,7 @@
 /*   By: fsabatie <fsabatie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/16 11:13:59 by fsabatie          #+#    #+#             */
-/*   Updated: 2018/02/16 14:47:20 by fsabatie         ###   ########.fr       */
+/*   Updated: 2018/03/08 20:12:49 by fsabatie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,22 +111,18 @@ void	 			get_paths(t_lem *lem)
 	LBP = 0;
 	LSP = 0;
 	max_paths = get_max_paths(lem);
-	if (!(LP = (t_vant**)malloc(sizeof(t_vant*) * max_paths)))
-		return ;
-	if (!(LS = (t_vant**)malloc(sizeof(t_vant*) * max_paths)))
+	if (!(LP = (t_vant**)malloc(sizeof(t_vant*) * max_paths))
+	|| !(LS = (t_vant**)malloc(sizeof(t_vant*) * max_paths)))
 		return ;
 	push_vant(lem, NULL, LROOMS[LSID]);
 	while (LBP < max_paths && LAANTS > 0)
 	{
 		spread_ants(lem, LROOMS[i++], gen);
 		if (i == LNR)
-		{
-			gen++;
-			if (ANTS_IN_END >= 1)
+			if ((gen += 1) && ANTS_IN_END >= 1)
 				find_bpaths(lem, max_paths);
-		}
 		i %= LNR;
 	}
 	if (LBP == 0)
-		exit(ft_printf("ERROR\n"));
+		exit_err(lem);
 }

@@ -1,25 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_equa.c                                          :+:      :+:    :+:   */
+/*   ft_pos_atoi.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fsabatie <fsabatie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/01/03 11:13:59 by fsabatie          #+#    #+#             */
-/*   Updated: 2018/01/28 16:54:16 by fsabatie         ###   ########.fr       */
+/*   Created: 2017/11/07 17:55:47 by fsabatie          #+#    #+#             */
+/*   Updated: 2018/03/08 19:59:38 by fsabatie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-t_equa	*ft_equanew(float x, float y, float a, float b)
+size_t	ft_pos_atoi(char *str)
 {
-	t_equa *e;
+	size_t res;
 
-	P_ALLOC(e, t_equa*, sizeof(e))
-	e->x = x;
-	e->y = y;
-	e->a = a;
-	e->b = b;
-	return (e);
+	res = 0;
+	while ((*str >= '\t' && *str <= '\r') || *str == ' ')
+		str++;
+	if (*str == '-' || *str == '+')
+		str++;
+	while (*str >= '0' && *str <= '9')
+		res = res * 10 + *str++ - '0';
+	return (res);
 }

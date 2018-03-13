@@ -6,7 +6,7 @@
 /*   By: fsabatie <fsabatie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/16 11:13:59 by fsabatie          #+#    #+#             */
-/*   Updated: 2018/02/16 14:46:50 by fsabatie         ###   ########.fr       */
+/*   Updated: 2018/03/08 19:04:00 by fsabatie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,13 +104,15 @@ typedef struct	s_lem
 	size_t		spaths;
 	t_vant		**s_paths;
 	t_vant		**paths;
+	t_vec		*vec;
 }				t_lem;
 
-int					parse(t_lem *lem);
-int					get_id(t_lem *lem, char *name);
-int					new_room(t_lem *lem, char *name);
-void				get_paths(t_lem *lem);
-void				push_vant(t_lem *lem, t_vant *queen, t_room *room);
-void				spread_ants(t_lem *lem, t_room* room, size_t gen);
+int				parse(t_lem *lem);
+int				get_id(t_lem *lem, char *name);
+int				new_room(t_lem *lem, char *name);
+void			get_paths(t_lem *lem);
+void			push_vant(t_lem *lem, t_vant *queen, t_room *room);
+void			spread_ants(t_lem *lem, t_room* room, size_t gen);
+void			exit_err(t_lem *lem);
 
 #endif

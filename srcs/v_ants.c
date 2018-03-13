@@ -6,7 +6,7 @@
 /*   By: fsabatie <fsabatie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/16 11:13:59 by fsabatie          #+#    #+#             */
-/*   Updated: 2018/02/16 14:47:20 by fsabatie         ###   ########.fr       */
+/*   Updated: 2018/03/08 18:59:40 by fsabatie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,11 +44,17 @@ static t_vant		*new_vant(t_lem *lem, t_room *room, t_vant *queen)
 
 void	push_vant(t_lem *lem, t_vant *queen, t_room *room)
 {
+	t_vant **paths;
+
 	if (!RVANT && !(RVANT = (t_vant**)malloc(sizeof(t_vant*))))
 		return ;
 	else
+	{
+		paths = RVANT;
 		if (!(RVANT = (t_vant**)ft_nrealloc(RVANT, sizeof(t_vant*), RNBVANT)))
 			return ;
+		free(paths);
+	}
 	RVANT[RNBVANT++] = new_vant(lem, room, queen);
 }
 

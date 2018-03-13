@@ -6,7 +6,7 @@
 /*   By: fsabatie <fsabatie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/16 11:13:59 by fsabatie          #+#    #+#             */
-/*   Updated: 2018/02/16 18:40:52 by fsabatie         ###   ########.fr       */
+/*   Updated: 2018/03/08 20:21:24 by fsabatie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,10 +32,10 @@ static int	build_lmatrix(t_lem *lem)
 	return (1);
 }
 
-static inline void parse_room(t_lem *lem, char *name, t_type *type)
+static inline int parse_room(t_lem *lem, char *name, t_type *type)
 {
 	if (!new_room(lem, name))
-		exit(ft_printf("ERROR\n"));
+		return (0);
 	LROOMS[LNR - 1]->type = 0 ;
 	if (*type != none && (LROOMS[LNR - 1]->type = *type))
 	{
@@ -44,6 +44,7 @@ static inline void parse_room(t_lem *lem, char *name, t_type *type)
 		(*type == start) ? g_start++ : g_end++;
 		*type = none;
 	}
+	return (1);
 }
 
 static inline int parse_links(t_lem *lem, char *link)
@@ -58,6 +59,7 @@ static inline int parse_links(t_lem *lem, char *link)
 	tab[1] = link;
 	id0 = get_id(lem, tab[0]);
 	id1 = get_id(lem, tab[1]);
+	free(tab[0]);
 	if (!LML && !build_lmatrix(lem))
 		return (0);
 	if (id0 == -1 || id1 == -1)
@@ -67,29 +69,36 @@ static inline int parse_links(t_lem *lem, char *link)
 	return (1);
 }
 
+
+void free_ex(t_lem *lem, char *line)
+{
+	free(line);
+	exit_err(lem);
+}
+
 int	parse(t_lem *lem)
 {
 	char	*line;
-	char	**name;
 	t_type	type;
 
-	LNR = 0;
 	type = none;
-	IFRET(!(LROOMS = (t_room**)malloc(sizeof(t_room*))), 0);
-	LROOMS = 0;
 	while (get_next_line(0, &line) > 0)
 	{
-		ft_printf("%s\n", line);
+		ft_putendl(line);
 		if (!LANTS && !(LANTS = ft_atoi(line)))
 			return (0);
 		else if ((ft_strstr(line, "##start") || ft_strstr(line, "##end")))
 			type = ft_strstr(line, "##start") ? start : end;
-		else if (((name = ft_strsplit(line, ' ')) && name[1]))
-			parse_room(lem, name[0], &type);
+		else if (ft_strcount(line, ' ') >= 2
+		&& !(line[ft_strcpos(line, ' ')] = 0))
+		{
+			if (!parse_room(lem, line, &type))
+				free_ex(lem, line);
+		}
 		else if (line && ft_strchr(line, '-'))
-			IFRET (!parse_links(lem, line), 0);
+			if (!parse_links(lem, line))
+				free_ex(lem, line);
+		free(line);
 	}
-	if (g_start != 1 || g_end != 1)
-		return (0);
-	return (1);
+	return (g_start != 1 || g_end != 1) ? 0 : 1;
 }

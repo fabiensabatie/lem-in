@@ -3,12 +3,13 @@
 start 0 0
 ##end
 end 0 0
-A 0 0
-B 0 0
-C 0 0
-D 0 0
-E 0 0
-start-A
-start-B
-start-C
-C-E
+a
+b
+c
+d
+e
+f
+a-b
+c-d
+e-f
+g-h
