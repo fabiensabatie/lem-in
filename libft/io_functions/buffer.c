@@ -57,7 +57,7 @@ static void	add_zero(t_print *s)
 }
 
 void		wchar_tobuffer(t_print *s, wchar_t c)
-{\
+{
 	if ((((c < 0 || c > 0x10ffff)
 	|| (MB_CUR_MAX == 1 && c > 0xff && c <= 0x10ffff)
 	|| (c >= 0xd800 && c <= 0xdfff))) && (s->cnt = -1))
