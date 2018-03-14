@@ -32,7 +32,7 @@ static void			free_all(t_lem *lem)
 		}
 		free(LROOMS[i]->vants);
 		free(LROOMS[i]->name);
-		free (LROOMS[i++]);
+		free(LROOMS[i++]);
 	}
 	free(LROOMS);
 }
@@ -41,7 +41,6 @@ void				exit_err(t_lem *lem)
 {
 	ft_putendl("ERROR");
 	free_all(lem);
-	while (1);
 	exit(1);
 }
 
@@ -50,14 +49,14 @@ static inline void	dispatch(t_lem *lem, size_t i, size_t *id, int p_len)
 	if (LP[i]->path[p_len]->ants)
 	{
 		if (p_len == 0 && (UPANTS += 1))
-			ft_printf("L%ld-%s ", (UPANTID = (*id)++) , UPRNAME);
+			ft_printf("L%ld-%s ", (UPANTID = (*id)++), UPRNAME);
 		else if (p_len == (int)LP[i]->gen - 1 && (LR->ants += 1))
 			ft_printf("L%ld-%s ", ANTID, LR->name);
 		else
 		{
 			UPANTS++;
 			UPANTID = ANTID;
-			ft_printf("L%ld-%s ",  ANTID, UPRNAME);
+			ft_printf("L%ld-%s ", ANTID, UPRNAME);
 		}
 		LP[i]->path[p_len]->ants--;
 	}
@@ -97,10 +96,10 @@ int					main(void)
 	_LML = NULL;
 	_LROOMS = 0;
 	_LNR = 0;
-	if (!parse(&lem))
+	if (!(lem.vec = ft_vecnew(1000000, 1)) || !parse(&lem))
 		exit_err(&lem);
 	get_paths(&lem);
+	ft_putendl(lem.vec->buffer);
 	send_ants(&lem);
 	free_all(&lem);
-	while (1);
 }

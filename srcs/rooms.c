@@ -19,11 +19,11 @@ int	new_room(t_lem *lem, char *name)
 
 	IFRET(!LROOMS && !(LROOMS = (t_room**)malloc(sizeof(t_room*))), 0);
 	rooms = LROOMS;
-	IFRET (!(LROOMS = (t_room**)ft_nrealloc(LROOMS, sizeof(t_room*), LNR)), 0);
+	IFRET(!(LROOMS = (t_room**)ft_nrealloc(LROOMS, sizeof(t_room*), LNR)), 0);
 	free(rooms);
 	if (LNR > 0 && get_id(lem, name) != -1)
 		return (0);
-	IFRET (!(room = (t_room*)malloc(sizeof(t_room))), 0);
+	IFRET(!(room = (t_room*)malloc(sizeof(t_room))), 0);
 	ft_bzero(room, sizeof(room));
 	RNAME = ft_strdup(name);
 	RID = LNR;

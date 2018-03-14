@@ -19,11 +19,11 @@
 #define ANTGEN RVANT[ant]->gen
 #define ANTDEAD RVANT[ant]->dead
 
-static t_vant		*new_vant(t_lem *lem, t_room *room, t_vant *queen)
+static t_vant	*new_vant(t_lem *lem, t_room *room, t_vant *queen)
 {
 	t_vant *worker;
 
-	IFRET (!(worker = (t_vant*)malloc(sizeof(t_vant))), 0);
+	IFRET(!(worker = (t_vant*)malloc(sizeof(t_vant))), 0);
 	if (queen && (WGEN = QGEN + 1))
 	{
 		if (!(WP = (t_room**)ft_nrealloc(QP, sizeof(t_room*), WGEN)))
@@ -42,7 +42,7 @@ static t_vant		*new_vant(t_lem *lem, t_room *room, t_vant *queen)
 	return (worker);
 }
 
-void	push_vant(t_lem *lem, t_vant *queen, t_room *room)
+void			push_vant(t_lem *lem, t_vant *queen, t_room *room)
 {
 	t_vant **paths;
 
@@ -69,7 +69,7 @@ static int		no_loop(t_vant *vant, size_t id)
 	return (1);
 }
 
-void	spread_ants(t_lem *lem, t_room* room, size_t gen)
+void			spread_ants(t_lem *lem, t_room *room, size_t gen)
 {
 	size_t	i;
 	size_t	ant;
@@ -85,7 +85,7 @@ void	spread_ants(t_lem *lem, t_room* room, size_t gen)
 			i++;
 		}
 		if (ANTGEN == gen && (ANTDEAD = 1))
- 			LAANTS--;
+			LAANTS--;
 		ant++;
 	}
 }

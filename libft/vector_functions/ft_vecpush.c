@@ -20,10 +20,10 @@
 t_vec	*ft_vecpush(t_vec *vec, void *data, size_t elem)
 {
 	size_t		p;
-	t_vec	*keep;
+	t_vec		k;
 
 	p = 0;
-	keep = vec;
+	k.buffer = vec->buffer;
 	if ((VO + (elem * VDS) < VS * VR))
 	{
 		ft_memcpy(VB + VO, data, elem * VDS);
@@ -33,6 +33,7 @@ t_vec	*ft_vecpush(t_vec *vec, void *data, size_t elem)
 	{
 		if (!(VB = (void*)ft_nrealloc(VB, ++VR * VS, VDS)))
 			return (NULL);
+		free(k.buffer);
 		ft_vecpush(vec, data, elem);
 	}
 	return (vec);

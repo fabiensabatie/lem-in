@@ -15,7 +15,7 @@
 static size_t g_start = 0;
 static size_t g_end = 0;
 
-static int	build_lmatrix(t_lem *lem)
+static int			build_lmatrix(t_lem *lem)
 {
 	size_t i;
 
@@ -32,11 +32,11 @@ static int	build_lmatrix(t_lem *lem)
 	return (1);
 }
 
-static inline int parse_room(t_lem *lem, char *name, t_type *type)
+static inline int	parse_room(t_lem *lem, char *name, t_type *type)
 {
 	if (!new_room(lem, name))
 		return (0);
-	LROOMS[LNR - 1]->type = 0 ;
+	LROOMS[LNR - 1]->type = 0;
 	if (*type != none && (LROOMS[LNR - 1]->type = *type))
 	{
 		LSID = (!LSID && *type == start) ? LROOMS[LNR - 1]->id : LSID;
@@ -47,7 +47,7 @@ static inline int parse_room(t_lem *lem, char *name, t_type *type)
 	return (1);
 }
 
-static inline int parse_links(t_lem *lem, char *link)
+static inline int	parse_links(t_lem *lem, char *link)
 {
 	char	*tab[2];
 	int		id0;
@@ -69,14 +69,13 @@ static inline int parse_links(t_lem *lem, char *link)
 	return (1);
 }
 
-
-void free_ex(t_lem *lem, char *line)
+void				free_ex(t_lem *lem, char *line)
 {
 	free(line);
 	exit_err(lem);
 }
 
-int	parse(t_lem *lem)
+int					parse(t_lem *lem)
 {
 	char	*line;
 	t_type	type;
@@ -84,7 +83,6 @@ int	parse(t_lem *lem)
 	type = none;
 	while (get_next_line(0, &line) > 0)
 	{
-		ft_putendl(line);
 		if (!LANTS && !(LANTS = ft_atoi(line)))
 			return (0);
 		else if ((ft_strstr(line, "##start") || ft_strstr(line, "##end")))
@@ -98,6 +96,8 @@ int	parse(t_lem *lem)
 		else if (line && ft_strchr(line, '-'))
 			if (!parse_links(lem, line))
 				free_ex(lem, line);
+		line = ft_strjoinfree(line, "\n");
+		ft_vecpush(lem->vec, line, ft_strlen(line));
 		free(line);
 	}
 	return (g_start != 1 || g_end != 1) ? 0 : 1;

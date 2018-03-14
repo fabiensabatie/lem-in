@@ -14,9 +14,9 @@
 
 char	*ft_retsplit(char *str, char c, int n)
 {
-	char **tab;
-	char *ret;
-	int i;
+	char	**tab;
+	char	*ret;
+	int		i;
 
 	i = 0;
 	tab = ft_strsplit(str, c);
@@ -27,5 +27,3 @@ char	*ft_retsplit(char *str, char c, int n)
 	free(ret);
 	return (ret);
 }
-
-

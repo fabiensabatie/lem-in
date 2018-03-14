@@ -127,7 +127,6 @@ typedef struct		s_file
 	struct s_file	*next;
 }					t_file;
 
-
 int					get_next_line(const int fd, char **line);
 
 /*
@@ -237,6 +236,5 @@ typedef struct		s_vec
 
 t_vec				*ft_vecnew(size_t size, int datasize);
 t_vec				*ft_vecpush(t_vec *vec, void *data, size_t elem);
-
 
 #endif

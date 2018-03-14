@@ -65,6 +65,10 @@ fclean: clean
 
 re: fclean all
 
+test: lib
+	@gcc test.c $(LIB) -o main
+	@./main
+
 peace:
 	@clear;
 	@echo "$(GREEN)"

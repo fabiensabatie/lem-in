@@ -14,8 +14,8 @@
 
 size_t	ft_strcount(char *haystack, char needle)
 {
-	int i;
-	size_t c;
+	int		i;
+	size_t	c;
 
 	c = 0;
 	i = 0;

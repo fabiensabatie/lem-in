@@ -13,7 +13,7 @@
 #include "../includes/lem_in.h"
 #define ANTS_IN_END LROOMS[LEID]->virtual_a
 
-static	t_bool	comp_paths(t_vant **group, t_vant *b, size_t size)
+static t_bool	comp_paths(t_vant **group, t_vant *b, size_t size)
 {
 	size_t i;
 	size_t ant;
@@ -36,7 +36,7 @@ static	t_bool	comp_paths(t_vant **group, t_vant *b, size_t size)
 	return (1);
 }
 
-void	keep_best(t_lem *lem)
+void			keep_best(t_lem *lem)
 {
 	size_t i;
 
@@ -54,30 +54,28 @@ void	keep_best(t_lem *lem)
 
 static void		find_bpaths(t_lem *lem, size_t max_paths)
 {
-	size_t i;
-	size_t y;
+	int i;
+	int y;
 
-	i = 0;
+	i = -1;
 	if (max_paths == 1 && LR->virtual_a && (LP[0] == LR->vants[0])
 	&& (LBP += 1))
 		return ;
-	while (LSP < max_paths && i < ANTS_IN_END)
+	while (LSP < max_paths && (size_t)++i < ANTS_IN_END)
 	{
 		LSP = 1;
 		ft_bzero(LS, sizeof(t_room*) * max_paths);
 		LS[0] = LR->vants[i];
 		y = i + 1;
-		while (y < ANTS_IN_END)
+		while ((size_t)y < ANTS_IN_END)
 		{
-			if (comp_paths(LS, LR->vants[y], LSP))
+			if (comp_paths(LS, LR->vants[y], LSP) && (LS[LSP] = LR->vants[y]))
 			{
-				LS[LSP] = LR->vants[y];
 				LSP++;
 				keep_best(lem);
 			}
 			y++;
 		}
-		i++;
 	}
 	if (!LBP && LSP == 1 && (LBP = 1))
 		LP[0] = LS[0];
@@ -100,11 +98,11 @@ static size_t	get_max_paths(t_lem *lem)
 	return ((max_s > max_e) ? max_e : max_s);
 }
 
-void	 			get_paths(t_lem *lem)
+void			get_paths(t_lem *lem)
 {
-	size_t	max_paths;
-	size_t	gen;
-	size_t	i;
+	size_t max_paths;
+	size_t gen;
+	size_t i;
 
 	i = LSID;
 	gen = 0;
