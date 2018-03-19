@@ -24,7 +24,7 @@ RESET = \033[0m
 
 # Defining variables
 
-NAME = lem_in
+NAME = lem-in
 LIB_NAME = libft.a
 LIB_PATH = ./libft
 FILL_SRCS = ../srcs
