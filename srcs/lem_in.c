@@ -32,8 +32,10 @@ static void			free_all(t_lem *lem)
 		}
 		free(LROOMS[i]->vants);
 		free(LROOMS[i]->name);
-		free(LROOMS[i++]);
+		free(LROOMS[i]);
+		free(LML[i++]);
 	}
+	free(LML);
 	free(LROOMS);
 }
 
@@ -70,7 +72,6 @@ static void			send_ants(t_lem *lem)
 
 	id = 1;
 	LROOMS[LSID]->ants = LANTS;
-	ft_printf("\n");
 	while ((int)LROOMS[LEID]->ants < (int)LANTS)
 	{
 		i = 0;

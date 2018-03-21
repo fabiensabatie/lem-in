@@ -13,9 +13,6 @@
 #ifndef LEM_IN_H
 # define LEM_IN_H
 # include "../libft/includes/libft.h"
-
-/** LEM_IN DEFINES */
-
 # define _LANTS lem.ants
 # define _LROOMS lem.rooms
 # define _LNR lem.nroom
@@ -40,9 +37,6 @@
 # define LS lem->s_paths
 # define LR LROOMS[LEID]
 # define FR LROOMS[LSID]
-
-/** ROOM DEFINES */
-
 # define _RANTS room.ants
 # define _RID room.id
 # define _RNAME room.name
@@ -53,17 +47,12 @@
 # define RNAME room->name
 # define RVANT room->vants
 # define RNBVANT room->virtual_a
-
-/** V_ANTS DEFINES */
-
 # define _VID vant.id
 # define _VPATH vant.path
 # define _VGEN vant.generation
 # define VID vant->id
 # define VPATH vant->path
 # define VGEN vant->gen
-
-typedef struct	s_room t_room;
 
 typedef enum	e_type
 {
@@ -74,9 +63,9 @@ typedef enum	e_type
 
 typedef struct	s_vant
 {
-	t_bool		dead;
-	t_room		**path;
-	size_t		gen;
+	t_bool			dead;
+	struct s_room	**path;
+	size_t			gen;
 }				t_vant;
 
 typedef struct	s_room
@@ -93,7 +82,6 @@ typedef struct	s_room
 typedef struct	s_lem
 {
 	t_bool		**m_links;
-	t_bool		**m_vways;
 	t_room		**rooms;
 	size_t		nroom;
 	size_t		ants;
@@ -112,7 +100,7 @@ int				get_id(t_lem *lem, char *name);
 int				new_room(t_lem *lem, char *name);
 void			get_paths(t_lem *lem);
 void			push_vant(t_lem *lem, t_vant *queen, t_room *room);
-void			spread_ants(t_lem *lem, t_room* room, size_t gen);
+void			spread_ants(t_lem *lem, t_room *room, size_t gen);
 void			exit_err(t_lem *lem);
 
 #endif

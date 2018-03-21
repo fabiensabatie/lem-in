@@ -40,7 +40,7 @@ LIB = $(addprefix $(LIB_PATH)/,$(LIB_NAME))
 # Compilation flags
 
 CC = gcc
-CPPFLAGS = -Wall -Wextra -Werror -g
+CPPFLAGS = -Wall -Wextra -Werror
 
 # Defining rules
 
