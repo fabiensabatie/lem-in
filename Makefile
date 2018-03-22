@@ -30,7 +30,7 @@ LIB_PATH = ./libft
 FILL_SRCS = ../srcs
 BUILD_PATH = build
 
-FILL_SRC_F =	lem_in.c parser.c rooms.c paths.c v_ants.c
+FILL_SRC_F =	lem_in.c parser.c rooms.c paths.c v_ants.c checkers.c
 
 OBJ_NAME = $(FILL_SRC_F:.c=.o)
 OBJS = $(addprefix $(BUILD_PATH)/,$(OBJ_NAME))

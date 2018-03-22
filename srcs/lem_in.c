@@ -33,10 +33,15 @@ static void			free_all(t_lem *lem)
 		free(LROOMS[i]->vants);
 		free(LROOMS[i]->name);
 		free(LROOMS[i]);
-		free(LML[i++]);
+		if (LML)
+			free(LML[i]);
+		i++;
 	}
-	free(LML);
+	if (LML)
+		free(LML);
 	free(LROOMS);
+	if (lem->vec && free_r((char*)lem->vec->buffer))
+		free(lem->vec);
 }
 
 void				exit_err(t_lem *lem)
@@ -91,16 +96,19 @@ static void			send_ants(t_lem *lem)
 
 int					main(void)
 {
-	t_lem lem;
+	t_lem	lem;
+	t_type	type;
 
 	ft_bzero(&lem, sizeof(lem));
+	type = none;
 	_LML = NULL;
 	_LROOMS = 0;
 	_LNR = 0;
-	if (!(lem.vec = ft_vecnew(1000000, 1)) || !parse(&lem))
+	if (!(lem.vec = ft_vecnew(1000000, 1)) || !parse(&lem, NULL, &type))
 		exit_err(&lem);
 	get_paths(&lem);
 	ft_putendl(lem.vec->buffer);
 	send_ants(&lem);
 	free_all(&lem);
+	return (0);
 }

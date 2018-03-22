@@ -93,14 +93,20 @@ typedef struct	s_lem
 	t_vant		**s_paths;
 	t_vant		**paths;
 	t_vec		*vec;
+	size_t		g_start;
+	size_t		g_end;
+	size_t		g_flag;
 }				t_lem;
 
-int				parse(t_lem *lem);
+int				parse(t_lem *lem, char *line, t_type *type);
 int				get_id(t_lem *lem, char *name);
 int				new_room(t_lem *lem, char *name);
 void			get_paths(t_lem *lem);
 void			push_vant(t_lem *lem, t_vant *queen, t_room *room);
 void			spread_ants(t_lem *lem, t_room *room, size_t gen);
 void			exit_err(t_lem *lem);
+int				parse_room(t_lem *lem, char *name, t_type *type);
+int				parse_links(t_lem *lem, char *link);
+int				free_r(char *line);
 
 #endif
